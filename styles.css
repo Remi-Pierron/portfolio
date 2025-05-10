@@ -36,7 +36,7 @@ header {
     font-size: 52px;
     position: relative;
     clip-path: inset(0 100% 0 0);
-    animation: reveal 0.75s steps(40, end) forwards;
+    animation: reveal 0.5s steps(40, end) forwards;
 }
 
 @keyframes reveal {
