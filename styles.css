@@ -85,7 +85,7 @@ nav ul li a:hover {
 section {
     margin: 20px 0;
     padding: 20px;
-    background: #897aff; /* Bleu poussé de portfolio copie */
+    background: #9b8ef9; /* Bleu poussé de portfolio copie */
     border-radius: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Effet d'ombre */
 }
@@ -238,7 +238,7 @@ span {
     display: flex;
     justify-content: center;
     gap: 10px; /* Espacement entre les images */
-    background: #897aff; /* Fond dark synthwave */
+    background: #9b8ef9; /* Fond dark synthwave */
     border-radius: 30px; /* Coins arrondis */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Effet d'ombre */
     padding: 20px; /* Espacement interne */
