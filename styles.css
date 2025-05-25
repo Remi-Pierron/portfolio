@@ -85,7 +85,7 @@ nav ul li a:hover {
 section {
     margin: 20px 0;
     padding: 20px;
-    background: #7968ff; /* Bleu poussé de portfolio copie */
+    background: #897aff; /* Bleu poussé de portfolio copie */
     border-radius: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Effet d'ombre */
 }
@@ -219,8 +219,8 @@ a:hover {
     padding: 10px 15px;
     margin: 5px;
     font-size: 14px;
-    color: #d21fff; /* Blanc */
-    background-color: #2d04b3; /* Neon rose synthwave */
+    color: #ffffff; /* Blanc */
+    background-color: #19006d; /* Neon rose synthwave */
     border-radius: 50px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
@@ -238,7 +238,7 @@ span {
     display: flex;
     justify-content: center;
     gap: 10px; /* Espacement entre les images */
-    background: #7968ff; /* Fond dark synthwave */
+    background: #897aff; /* Fond dark synthwave */
     border-radius: 30px; /* Coins arrondis */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Effet d'ombre */
     padding: 20px; /* Espacement interne */

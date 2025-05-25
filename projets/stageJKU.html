@@ -27,6 +27,16 @@
         span {
             font-family: Arial, sans-serif; /* Applique la police Arial aux balises span */
         }
+        /* New flexbox styling for the image row */
+        .image-row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .image-row img {
+            margin: 0;
+            max-width: 30%;
+        }
     </style>
 </head>
 <body>
@@ -93,6 +103,25 @@
         <p><span>
             J'ai acquis des compétences en analyse de données, en nettoyage de données, en modélisation statistique et en apprentissage automatique. J'ai également 
             amélioré mes compétences en programmation R et ma capacité à travailler avec des ensembles de données complexes.
+        </span></p>
+    </section>
+    <section>
+        <h2>Et en dehors du cadre universitaire, qu'ai-je découvert ?</h2>
+        <br>
+        <!-- Wrap images in a flex container -->
+        <div class="image-row">
+            <img src="../image/at-work5.jpeg" alt="Description de votre image">
+            <img src="../image/at-work6.jpeg" alt="Description de votre image">
+            <img src="../image/at-work7.jpeg" alt="Description de votre image">
+        </div>
+        <br>
+        <br>
+        <p><span>
+            J'ai découvert la culture autrichienne, notamment à travers la gastronomie et les traditions locales. J'ai également eu l'occasion de rencontrer des 
+            étudiants internationaux et de partager des expériences culturelles enrichissantes. Mais ce qui m'a le plus marqué, c'est le lieu où j'ai vécu.
+            Il s'agit d'une ferme communautaire, un endroit alternatif où les gens vivent ensemble, partagent des ressources et pratiquent l'agriculture durable. 
+            J'ai appris à apprécier la simplicité de la vie en communauté. C'était une expérience unique qui m'a permis de me rapprocher de la nature et de découvrir 
+            un mode de vie différent.
         </span></p>
     </section>
     <section>
