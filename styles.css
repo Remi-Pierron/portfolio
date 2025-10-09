@@ -155,6 +155,12 @@ p span {
         width: 90%; /* Ajuste la largeur pour s'adapter à l'écran */
         height: auto; /* Maintient le ratio de l'image */
     }
+
+    .software-logos .logos img {
+        width: 56px;
+        height: 56px;
+        padding: 6px;
+    }
 }
 
 /* Style pour les liens */
@@ -250,7 +256,7 @@ span {
     height: 175px; /* Hauteur fixe */
     object-fit: cover; /* Maintient le ratio tout en remplissant l'espace */
     border-radius: 5px; /* Coins arrondis (optionnel) */
-    transition: transform 0.3s ease; /* Transition fluide pour l'effet */
+    transition: transform 0.45s ease; /* ralenti depuis 0.3s */
 }
 
 .image-gallery img:hover {
@@ -262,4 +268,81 @@ span {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* Styles pour les logos de logiciels */
+.software-logos {
+    margin: 20px 0;
+    padding: 20px;
+    background: #afa5fb;
+    border-radius: 30px;
+    text-align: center;
+    
+    
+}
+
+.software-logos h3 {
+    margin-bottom: 12px;
+    font-size: 20px;
+    color: #6cce73;
+}
+
+.software-logos .logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    padding: 10px 0;
+}
+
+.software-logos .logos img {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 10px rgba(0,0,0,0.35));
+    border-radius: 12px;
+    background: rgba(255,255,255,0.02);
+    padding: 8px;
+    /* slow down transform/box-shadow transitions for smoother feel */
+    transition: transform 0.45s ease, box-shadow 0.45s ease;
+    animation-name: float;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    /* valeurs par défaut, seront ajustées par JS */
+    animation-duration: 5s;   /* augmenté depuis 3.5s */
+    animation-delay: 0s;
+    cursor: pointer;           /* indique qu'on peut interagir */
+    will-change: transform;    /* aide le navigateur à animer */
+    position: relative;        /* facilite la gestion du z-index lors des swaps */
+}
+
+/* met en avant les éléments en cours de swap */
+.software-logos .logos img.swapping {
+    z-index: 20;
+    box-shadow: 0 18px 36px rgba(0,0,0,0.45);
+    will-change: transform;
+}
+
+/* Variation par logo pour effet moins uniforme
+   (règles statiques commentées : la désynchronisation est maintenant gérée automatiquement par logo-anim.js)
+*/
+/*
+.software-logos .logos img:nth-child(1) { animation-duration: 3.2s; animation-delay: 0s; }
+.software-logos .logos img:nth-child(2) { animation-duration: 4.0s; animation-delay: 0.2s; }
+.software-logos .logos img:nth-child(3) { animation-duration: 3.6s; animation-delay: 0.4s; }
+.software-logos .logos img:nth-child(4) { animation-duration: 4.4s; animation-delay: 0.1s; }
+.software-logos .logos img:nth-child(5) { animation-duration: 3.8s; animation-delay: 0.3s; }
+*/
+
+.software-logos .logos img:hover {
+    transform: translateY(-8px) scale(1.08);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.4);
+}
+
+/* Animation floating */
+@keyframes float {
+    0%   { transform: translateY(0) rotate(0.5deg); }
+    50%  { transform: translateY(-12px) rotate(-0.5deg); }
+    100% { transform: translateY(0) rotate(0.5deg); }
 }
