@@ -134,4 +134,68 @@ document.addEventListener('DOMContentLoaded', function () {
         const observer = new MutationObserver(() => attachHoverSwap());
         observer.observe(logosContainer, { childList: true, subtree: false });
     }
+
+    // New: autonomous swapping loop (randomized interval + small concurrency)
+    (function enableAutoLogoSwaps() {
+        const enabled = true;               // bascule globale
+        if (!enabled) return;
+
+        const minInterval = 900;            // ms (min delay entre swaps)
+        const maxInterval = 2200;           // ms (max delay entre swaps)
+        const concurrency = 2;              // nombre de chaînes parallèles
+        let running = true;
+
+        function randDelay() {
+            return Math.floor(Math.random() * (maxInterval - minInterval) + minInterval);
+        }
+
+        async function pickAndSwapOnce() {
+            const list = Array.from(document.querySelectorAll(selector));
+            if (list.length < 2) return;
+            const candidates = list.filter(el => el.dataset.swapping !== '1');
+            if (candidates.length < 2) return;
+
+            const aIdx = Math.floor(Math.random() * candidates.length);
+            let bIdx;
+            do { bIdx = Math.floor(Math.random() * candidates.length); } while (bIdx === aIdx);
+            const a = candidates[aIdx];
+            const b = candidates[bIdx];
+
+            try {
+                await jumpSwap(a, b);
+            } catch (e) {
+                // ignore animation errors/timeouts
+            }
+        }
+
+        function scheduleChain() {
+            (async function loop() {
+                while (running) {
+                    await new Promise(r => setTimeout(r, randDelay()));
+                    if (!running) break;
+                    // si l'onglet est caché, on ralentit fortement pour économiser CPU
+                    if (document.hidden) {
+                        await new Promise(r => setTimeout(r, 2000 + Math.random() * 3000));
+                        continue;
+                    }
+                    await pickAndSwapOnce();
+                }
+            })();
+        }
+
+        // lancer plusieurs chaines pour comportement plus vivant
+        for (let i = 0; i < concurrency; i++) scheduleChain();
+
+        // API simple pour debug/control via la console
+        window.__logoAutoSwap = {
+            stop() { running = false; },
+            start() {
+                if (!running) {
+                    running = true;
+                    for (let i = 0; i < concurrency; i++) scheduleChain();
+                }
+            },
+            isRunning() { return running; }
+        };
+    })();
 });
