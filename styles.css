@@ -10,18 +10,18 @@ body {
     font-weight: 600; /* Si 500 est supporté */
     line-height: 1.6;
     color: #000000; /* Passage de texte clair à noir */
-    background-color: #01003a; /* Fond inspiré de portfolio copie */
+    background: url('image/mac_os_10.jpg') no-repeat center center fixed; /* Ajout de l'image de fond */
+    background-size: cover; /* Ajuste l'image pour couvrir tout l'écran */
     padding: 0 20px;
-    
 }
 
 /* En-tête */
 header {
     background: #000000c6; /* Fond semi-transparent noir */
-    color: #c46cce; /* Couleur rose claire */
+    color: #8e95ff; /* Couleur rose claire */
     padding: 20px 0;
     border-radius: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Effet d'ombre */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Ombre plus prononcée */
 }
 
 .header-content {
@@ -36,7 +36,7 @@ header {
     font-size: 52px;
     position: relative;
     clip-path: inset(0 100% 0 0);
-    animation: reveal 0.35s steps(40, end) forwards;
+    animation: reveal 1s steps(40, end) forwards;
 }
 
 @keyframes reveal {
@@ -87,7 +87,50 @@ section {
     padding: 20px;
     background: #afa5fb; /* Bleu poussé de portfolio copie */
     border-radius: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Effet d'ombre */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Ombre plus prononcée */
+    /* accelerate only what changes */
+    will-change: transform, backdrop-filter;
+    transform-origin: center center;
+    transition:
+        transform 220ms cubic-bezier(.2,.7,.2,1),
+        box-shadow 220ms ease,
+        background 220ms ease,
+        backdrop-filter 220ms ease,
+        -webkit-backdrop-filter 220ms ease;
+}
+
+/* Hover/focus/touch "zoom + less transparent" */
+section:hover,
+section:focus-within,
+section.is-hovered {
+    transform: scale(1.005);
+    /* Slightly stronger glass: more opaque + more blur/saturation */
+    background: linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.12)) !important;
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    box-shadow:
+        0 16px 44px rgba(0,0,0,0.32),
+        inset 0 1px 0 rgba(255,255,255,0.22),
+        inset 0 -1px 0 rgba(255,255,255,0.08);
+}
+
+/* Keep hover effects only where hover exists; JS covers touch */
+@media (hover: none) {
+    section:hover { transform: none; }
+}
+
+/* Reduced motion: keep emphasis without scaling */
+@media (prefers-reduced-motion: reduce) {
+    section {
+        transition:
+            box-shadow 150ms ease,
+            background 150ms ease;
+    }
+    section:hover,
+    section:focus-within,
+    section.is-hovered {
+        transform: none;
+    }
 }
 
 /* Formulaire de contact */
@@ -119,10 +162,10 @@ footer {
     text-align: center;
     margin: 20px 0;
     background-color: #000000c6; /* Fond semi-transparent noir */
-    color: #c46cce; /* Texte en rose claire */
+    color: #000000; /* Texte en rose claire */
     border-radius: 30px;
     padding: 20px 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Effet d'ombre */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Ombre plus prononcée */
 }
 
 p span {
@@ -194,7 +237,7 @@ a:hover {
 .project-card {
     background: #fff; /* Fond blanc */
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Ombre plus prononcée */
     overflow: hidden;
     text-align: center;
     width: 300px;
@@ -246,7 +289,7 @@ span {
     gap: 10px; /* Espacement entre les images */
     background: #afa5fb; /* Fond dark synthwave */
     border-radius: 30px; /* Coins arrondis */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Effet d'ombre */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Ombre plus prononcée */
     padding: 20px; /* Espacement interne */
     margin: 20px 0; /* Espacement externe */
 }
@@ -300,7 +343,7 @@ span {
     width: 72px;
     height: 72px;
     object-fit: contain;
-    filter: drop-shadow(0 6px 10px rgba(0,0,0,0.35));
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.4)); /* Ombre plus prononcée */
     border-radius: 12px;
     background: rgba(255,255,255,0.02);
     padding: 8px;
@@ -320,7 +363,7 @@ span {
 /* met en avant les éléments en cours de swap */
 .software-logos .logos img.swapping {
     z-index: 20;
-    box-shadow: 0 18px 36px rgba(0,0,0,0.45);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5); /* Ombre encore plus prononcée */
     will-change: transform;
 }
 
@@ -345,4 +388,104 @@ span {
     0%   { transform: translateY(0) rotate(0.5deg); }
     50%  { transform: translateY(-12px) rotate(-0.5deg); }
     100% { transform: translateY(0) rotate(0.5deg); }
+}
+
+/* Liquid glass upgrade (glassmorphism + animated specular) */
+header,
+section,
+footer,
+.image-gallery,
+.software-logos {
+    position: relative;
+    overflow: hidden;
+    /* Replace solid fills with translucent, layered gradient */
+    background: linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06)) !important;
+    border: 1px solid rgba(255,255,255,0.28);
+    background-clip: padding-box;
+    /* Blur and slight saturation for the glass look */
+    backdrop-filter: blur(14px) saturate(120%);
+    -webkit-backdrop-filter: blur(14px) saturate(120%);
+    /* Softer shadow + subtle inner sheens */
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.25),
+        inset 0 1px 0 rgba(255,255,255,0.18),
+        inset 0 -1px 0 rgba(255,255,255,0.06);
+}
+
+/* Keep content above the animated highlight layer */
+header > *, section > *, footer > *, .image-gallery > *, .software-logos > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Animated “liquid” highlight */
+header::before,
+section::before,
+footer::before,
+.image-gallery::before,
+.software-logos::before {
+    content: "";
+    position: absolute;
+    inset: -40% -60% auto -60%;
+    height: 220%;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+    /* Soft radial + conic blend for liquid shine */
+    background:
+        radial-gradient(50% 40% at 20% 20%,
+            rgba(255,255,255,0.18) 0%,
+            rgba(255,255,255,0.10) 22%,
+            rgba(255,255,255,0.04) 38%,
+            rgba(255,255,255,0) 60%),
+        conic-gradient(from 0deg at 50% 50%,
+            rgba(255,255,255,0.06),
+            rgba(255,255,255,0) 50%,
+            rgba(255,255,255,0.06) 100%);
+    transform: rotate(18deg);
+    animation: liquidShift 18s ease-in-out infinite alternate;
+}
+
+/* Subtle edge glow for extra depth */
+header::after,
+section::after,
+footer::after,
+.image-gallery::after,
+.software-logos::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(145deg, rgba(255,255,255,0.28), rgba(255,255,255,0) 42%);
+    mix-blend-mode: screen;
+    opacity: 0.5;
+}
+
+/* Liquid movement */
+@keyframes liquidShift {
+    0% {
+        transform: translate3d(-5%, -2%, 0) rotate(18deg) scale(1);
+        opacity: 0.9;
+    }
+    50% {
+        transform: translate3d(3%, 0%, 0) rotate(20deg) scale(1.02);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate3d(8%, 4%, 0) rotate(23deg) scale(1.04);
+        opacity: 0.85;
+    }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    header::before, section::before, footer::before,
+    .image-gallery::before, .software-logos::before {
+        animation: none;
+    }
+    .software-logos .logos img, .image-gallery img {
+        animation: none;
+        transition: none;
+    }
 }
