@@ -18,7 +18,7 @@ body {
 /* En-tête */
 header {
     background: #000000c6; /* Fond semi-transparent noir */
-    color: #8e95ff; /* Couleur rose claire */
+    color: #000000; /* Couleur rose claire */
     padding: 20px 0;
     border-radius: 30px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Ombre plus prononcée */
@@ -103,15 +103,15 @@ section {
 section:hover,
 section:focus-within,
 section.is-hovered {
-    transform: scale(1.005);
-    /* Slightly stronger glass: more opaque + more blur/saturation */
-    background: linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.12)) !important;
-    backdrop-filter: blur(18px) saturate(140%);
-    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    transform: scale(1.01);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.523), rgba(255,255,255,0.15)) !important; /* Couleur de fond plus lumineuse */
+    color: #000000; /* Texte en bleu poussé */
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
     box-shadow:
-        0 16px 44px rgba(0,0,0,0.32),
-        inset 0 1px 0 rgba(255,255,255,0.22),
-        inset 0 -1px 0 rgba(255,255,255,0.08);
+        0 20px 50px rgba(0,0,0,0.4),
+        inset 0 2px 0 rgba(255,255,255,0.3),
+        inset 0 -2px 0 rgba(255,255,255,0.1);
 }
 
 /* Keep hover effects only where hover exists; JS covers touch */
@@ -399,7 +399,7 @@ footer,
     position: relative;
     overflow: hidden;
     /* Replace solid fills with translucent, layered gradient */
-    background: linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06)) !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.229), rgba(255, 255, 255, 0.549)) !important;
     border: 1px solid rgba(255,255,255,0.28);
     background-clip: padding-box;
     /* Blur and slight saturation for the glass look */
