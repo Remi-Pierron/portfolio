@@ -104,8 +104,8 @@ section:hover,
 section:focus-within,
 section.is-hovered {
     transform: scale(1.01);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.523), rgba(255,255,255,0.15)) !important; /* Couleur de fond plus lumineuse */
-    color: #000000; /* Texte en bleu poussé */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.599), rgba(255, 255, 255, 0.541)) !important; /* Couleur de fond plus lumineuse */
+    color: #14102a; /* Texte en bleu poussé */
     backdrop-filter: blur(20px) saturate(160%);
     -webkit-backdrop-filter: blur(20px) saturate(160%);
     box-shadow:
@@ -399,7 +399,7 @@ footer,
     position: relative;
     overflow: hidden;
     /* Replace solid fills with translucent, layered gradient */
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.229), rgba(255, 255, 255, 0.549)) !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.274), rgba(255, 255, 255, 0.395)) !important;
     border: 1px solid rgba(255,255,255,0.28);
     background-clip: padding-box;
     /* Blur and slight saturation for the glass look */
