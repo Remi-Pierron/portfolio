@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // New: autonomous swapping loop (randomized interval + small concurrency)
     (function enableAutoLogoSwaps() {
-        const enabled = true;               // bascule globale
+        const enabled = false;              // bascule globale — désactivé pour swap sur hover uniquement
         if (!enabled) return;
 
         const minInterval = 900;            // ms (min delay entre swaps)
