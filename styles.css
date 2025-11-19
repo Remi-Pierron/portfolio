@@ -1,5 +1,5 @@
 /* Réinitialiser les styles par défaut du navigateur */
-* {
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -7,21 +7,25 @@
 
 body {
     font-family: 'Rajdhani', sans-serif;
-    font-weight: 600; /* Si 500 est supporté */
+    font-weight: 600;
     line-height: 1.6;
-    color: #000000; /* Passage de texte clair à noir */
-    background: url('image/mac_os_10.jpg') no-repeat center center fixed; /* Ajout de l'image de fond */
-    background-size: cover; /* Ajuste l'image pour couvrir tout l'écran */
+    color: #000000;
+    background: url('image/mac_os_10.webp') no-repeat center center fixed;
+    background-size: cover;
     padding: 0 20px;
+    /* Optimisation : force le GPU */
+    transform: translateZ(0);
 }
 
 /* En-tête */
 header {
-    background: #000000c6; /* Fond semi-transparent noir */
-    color: #000000; /* Couleur rose claire */
+    background: #000000c6;
+    color: #000000;
     padding: 20px 0;
     border-radius: 30px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Ombre plus prononcée */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    /* Optimisation : isoler le conteneur */
+    contain: layout style paint;
 }
 
 .header-content {
@@ -37,6 +41,8 @@ header {
     position: relative;
     clip-path: inset(0 100% 0 0);
     animation: reveal 1s steps(40, end) forwards;
+    /* Optimisation : forcer GPU */
+    will-change: clip-path;
 }
 
 @keyframes reveal {
@@ -58,6 +64,8 @@ header {
     width: 300px;
     height: 400px;
     object-fit: cover;
+    /* Optimisation : décodage async des images */
+    content-visibility: auto;
 }
 
 /* Nav */
@@ -85,29 +93,30 @@ nav ul li a:hover {
 section {
     margin: 20px 0;
     padding: 20px;
-    background: #afa5fb; /* Bleu poussé de portfolio copie */
+    background: #afa5fb;
     border-radius: 30px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Ombre plus prononcée */
-    /* accelerate only what changes */
-    will-change: transform, backdrop-filter;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
     transform-origin: center center;
     transition:
         transform 220ms cubic-bezier(.2,.7,.2,1),
         box-shadow 220ms ease,
-        background 220ms ease,
-        backdrop-filter 220ms ease,
-        -webkit-backdrop-filter 220ms ease;
+        background 220ms ease;
+    /* Optimisations critiques */
+    content-visibility: auto;
+    contain-intrinsic-size: auto 500px;
+    contain: layout style paint;
 }
 
-/* Hover/focus/touch "zoom + less transparent" */
 section:hover,
 section:focus-within,
 section.is-hovered {
-    transform: scale(1.01);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.599), rgba(255, 255, 255, 0.541)) !important; /* Couleur de fond plus lumineuse */
-    color: #14102a; /* Texte en bleu poussé */
-    backdrop-filter: blur(20px) saturate(160%);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    /* Optimisation : only transform pendant l'hover */
+    will-change: transform;
+    transform: scale(1.01) translateZ(0);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.599), rgba(255, 255, 255, 0.541)) !important;
+    color: #14102a;
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
     box-shadow:
         0 20px 50px rgba(0,0,0,0.4),
         inset 0 2px 0 rgba(255,255,255,0.3),
@@ -134,6 +143,11 @@ section.is-hovered {
 }
 
 /* Formulaire de contact */
+form {
+    /* Optimisation : isoler le formulaire */
+    contain: layout style;
+}
+
 form label {
     display: block;
     margin-top: 10px;
@@ -161,11 +175,13 @@ form button:hover {
 footer {
     text-align: center;
     margin: 20px 0;
-    background-color: #000000c6; /* Fond semi-transparent noir */
-    color: #000000; /* Texte en rose claire */
+    background-color: #000000c6;
+    color: #000000;
     border-radius: 30px;
     padding: 20px 0;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Ombre plus prononcée */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    /* Optimisation : isoler le footer */
+    contain: layout style paint;
 }
 
 p span {
@@ -286,25 +302,31 @@ span {
 .image-gallery {
     display: flex;
     justify-content: center;
-    gap: 10px; /* Espacement entre les images */
-    background: #afa5fb; /* Fond dark synthwave */
-    border-radius: 30px; /* Coins arrondis */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Ombre plus prononcée */
-    padding: 20px; /* Espacement interne */
-    margin: 20px 0; /* Espacement externe */
+    gap: 10px;
+    background: #afa5fb;
+    border-radius: 30px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    margin: 20px 0;
+    /* Optimisations */
+    content-visibility: auto;
+    contain: layout style paint;
 }
 
 .image-gallery img {
-    width: 250px; /* Largeur fixe */
-    height: 175px; /* Hauteur fixe */
-    object-fit: cover; /* Maintient le ratio tout en remplissant l'espace */
-    border-radius: 5px; /* Coins arrondis (optionnel) */
-    transition: transform 0.45s ease; /* ralenti depuis 0.3s */
+    width: 250px;
+    height: 175px;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: transform 0.45s ease;
+    /* Optimisation : GPU uniquement pendant transition */
+    will-change: auto;
 }
 
 .image-gallery img:hover {
-    transform: translateY(-10px); /* Déplace légèrement l'image vers le haut */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Ajoute une ombre plus prononcée */
+    will-change: transform;
+    transform: translateY(-10px) translateZ(0);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 .video-container {
@@ -320,8 +342,9 @@ span {
     background: #afa5fb;
     border-radius: 30px;
     text-align: center;
-    
-    
+    /* Optimisations */
+    content-visibility: auto;
+    contain: layout style paint;
 }
 
 .software-logos h3 {
@@ -343,54 +366,42 @@ span {
     width: 72px;
     height: 72px;
     object-fit: contain;
-    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.4)); /* Ombre plus prononcée */
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.4));
     border-radius: 12px;
     background: rgba(255,255,255,0.02);
     padding: 8px;
-    /* slow down transform/box-shadow transitions for smoother feel */
     transition: transform 0.45s ease, box-shadow 0.45s ease;
     animation-name: float;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
-    /* valeurs par défaut, seront ajustées par JS */
-    animation-duration: 5s;   /* augmenté depuis 3.5s */
+    animation-duration: 5s;
     animation-delay: 0s;
-    cursor: pointer;           /* indique qu'on peut interagir */
-    will-change: transform;    /* aide le navigateur à animer */
-    position: relative;        /* facilite la gestion du z-index lors des swaps */
+    cursor: pointer;
+    position: relative;
+    /* Optimisation : will-change seulement quand nécessaire */
+    will-change: auto;
 }
 
-/* met en avant les éléments en cours de swap */
 .software-logos .logos img.swapping {
-    z-index: 20;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5); /* Ombre encore plus prononcée */
     will-change: transform;
+    z-index: 20;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
 }
-
-/* Variation par logo pour effet moins uniforme
-   (règles statiques commentées : la désynchronisation est maintenant gérée automatiquement par logo-anim.js)
-*/
-/*
-.software-logos .logos img:nth-child(1) { animation-duration: 3.2s; animation-delay: 0s; }
-.software-logos .logos img:nth-child(2) { animation-duration: 4.0s; animation-delay: 0.2s; }
-.software-logos .logos img:nth-child(3) { animation-duration: 3.6s; animation-delay: 0.4s; }
-.software-logos .logos img:nth-child(4) { animation-duration: 4.4s; animation-delay: 0.1s; }
-.software-logos .logos img:nth-child(5) { animation-duration: 3.8s; animation-delay: 0.3s; }
-*/
 
 .software-logos .logos img:hover {
-    transform: translateY(-8px) scale(1.08);
+    will-change: transform;
+    transform: translateY(-8px) scale(1.08) translateZ(0);
     box-shadow: 0 14px 30px rgba(0,0,0,0.4);
 }
 
-/* Animation floating */
+/* Animation floating - GPU optimized */
 @keyframes float {
-    0%   { transform: translateY(0) rotate(0.5deg); }
-    50%  { transform: translateY(-12px) rotate(-0.5deg); }
-    100% { transform: translateY(0) rotate(0.5deg); }
+    0%   { transform: translate3d(0, 0, 0) rotate(0.5deg); }
+    50%  { transform: translate3d(0, -12px, 0) rotate(-0.5deg); }
+    100% { transform: translate3d(0, 0, 0) rotate(0.5deg); }
 }
 
-/* Liquid glass upgrade (glassmorphism + animated specular) */
+/* Liquid glass upgrade - SIMPLIFIÉ pour performances */
 header,
 section,
 footer,
@@ -398,94 +409,106 @@ footer,
 .software-logos {
     position: relative;
     overflow: hidden;
-    /* Replace solid fills with translucent, layered gradient */
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.274), rgba(255, 255, 255, 0.395)) !important;
     border: 1px solid rgba(255,255,255,0.28);
     background-clip: padding-box;
-    /* Blur and slight saturation for the glass look */
-    backdrop-filter: blur(14px) saturate(120%);
-    -webkit-backdrop-filter: blur(14px) saturate(120%);
-    /* Softer shadow + subtle inner sheens */
+    backdrop-filter: blur(8px) saturate(120%);
+    -webkit-backdrop-filter: blur(8px) saturate(120%);
     box-shadow:
         0 10px 30px rgba(0,0,0,0.25),
         inset 0 1px 0 rgba(255,255,255,0.18),
         inset 0 -1px 0 rgba(255,255,255,0.06);
 }
 
-/* Keep content above the animated highlight layer */
 header > *, section > *, footer > *, .image-gallery > *, .software-logos > * {
     position: relative;
     z-index: 1;
 }
 
-/* Animated “liquid” highlight */
-header::before,
-section::before,
-footer::before,
-.image-gallery::before,
-.software-logos::before {
-    content: "";
-    position: absolute;
-    inset: -40% -60% auto -60%;
-    height: 220%;
-    border-radius: inherit;
-    pointer-events: none;
-    z-index: 0;
-    /* Soft radial + conic blend for liquid shine */
-    background:
-        radial-gradient(50% 40% at 20% 20%,
-            rgba(255,255,255,0.18) 0%,
-            rgba(255,255,255,0.10) 22%,
-            rgba(255,255,255,0.04) 38%,
-            rgba(255,255,255,0) 60%),
-        conic-gradient(from 0deg at 50% 50%,
-            rgba(255,255,255,0.06),
-            rgba(255,255,255,0) 50%,
-            rgba(255,255,255,0.06) 100%);
-    transform: rotate(18deg);
-    animation: liquidShift 18s ease-in-out infinite alternate;
+/* OPTIMISATION CRITIQUE : Animations coûteuses désactivées par défaut */
+/* Activées via JS uniquement si nécessaire et si performant */
+@media (prefers-reduced-motion: no-preference) {
+    /* Animation seulement pour les sections visibles */
+    header.animate-liquid::before,
+    section.animate-liquid::before,
+    footer.animate-liquid::before,
+    .image-gallery.animate-liquid::before,
+    .software-logos.animate-liquid::before {
+        content: "";
+        position: absolute;
+        inset: -40% -60% auto -60%;
+        height: 220%;
+        border-radius: inherit;
+        pointer-events: none;
+        z-index: 0;
+        background:
+            radial-gradient(50% 40% at 20% 20%,
+                rgba(255,255,255,0.18) 0%,
+                rgba(255,255,255,0) 60%);
+        transform: rotate(18deg) translateZ(0);
+        animation: liquidShift 30s ease-in-out infinite alternate;
+        will-change: transform;
+    }
+
+    /* Edge glow supprimé car impact minimal visible */
 }
 
-/* Subtle edge glow for extra depth */
-header::after,
-section::after,
-footer::after,
-.image-gallery::after,
-.software-logos::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    background: linear-gradient(145deg, rgba(255,255,255,0.28), rgba(255,255,255,0) 42%);
-    mix-blend-mode: screen;
-    opacity: 0.5;
-}
-
-/* Liquid movement */
+/* Liquid movement - GPU optimized */
 @keyframes liquidShift {
     0% {
         transform: translate3d(-5%, -2%, 0) rotate(18deg) scale(1);
         opacity: 0.9;
     }
-    50% {
-        transform: translate3d(3%, 0%, 0) rotate(20deg) scale(1.02);
-        opacity: 0.8;
-    }
     100% {
-        transform: translate3d(8%, 4%, 0) rotate(23deg) scale(1.04);
+        transform: translate3d(8%, 4%, 0) rotate(23deg) scale(1.02);
         opacity: 0.85;
     }
 }
 
 /* Respect reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
-    header::before, section::before, footer::before,
-    .image-gallery::before, .software-logos::before {
-        animation: none;
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
-    .software-logos .logos img, .image-gallery img {
-        animation: none;
-        transition: none;
+}
+
+/* Firefox optimizations */
+@supports (-moz-appearance: none) {
+    header,
+    section,
+    footer,
+    .image-gallery,
+    .software-logos {
+        backdrop-filter: blur(6px) saturate(110%);
+        -webkit-backdrop-filter: blur(6px) saturate(110%);
+    }
+    
+    section:hover,
+    section:focus-within,
+    section.is-hovered {
+        backdrop-filter: blur(10px) saturate(130%);
+        -webkit-backdrop-filter: blur(10px) saturate(130%);
+    }
+    
+    /* Animation liquid désactivée sur Firefox par défaut */
+    header.animate-liquid::before,
+    section.animate-liquid::before,
+    footer.animate-liquid::before,
+    .image-gallery.animate-liquid::before,
+    .software-logos.animate-liquid::before {
+        animation-duration: 40s;
+    }
+}
+
+/* Optimisation pour Safari */
+@supports (-webkit-backdrop-filter: blur(1px)) {
+    header,
+    section,
+    footer,
+    .image-gallery,
+    .software-logos {
+        -webkit-transform: translateZ(0);
     }
 }
