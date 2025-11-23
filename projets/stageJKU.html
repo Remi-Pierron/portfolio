@@ -6,6 +6,8 @@
     <title>Stage - Johannes Kepler Universität</title>
     <link rel="stylesheet" href="../styles.css"> <!-- Chemin relatif pour accéder au fichier CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS pour OpenStreetMap -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         /* Styles CSS spécifiques à cette page */
         img {
@@ -36,6 +38,27 @@
         .image-row img {
             margin: 0;
             max-width: 30%;
+        }
+
+        /* Style pour la carte */
+        #map {
+            height: 400px;
+            width: 100%;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        /* Fix Leaflet: ne pas appliquer les styles globaux aux images de la carte */
+        .leaflet-container img {
+            max-width: none !important;
+            max-height: none !important;
+            margin: 0 !important;
+            border-radius: 0 !important;
+        }
+        .leaflet-container .leaflet-marker-icon,
+        .leaflet-container .leaflet-marker-shadow {
+            width: auto !important;
+            height: auto !important;
         }
     </style>
 </head>
@@ -159,6 +182,15 @@
 
 
     <section>
+        <h2>📍 Localisation de la Johannes Kepler Universität</h2>
+        <div id="map"></div>
+        <p><span>
+            La Johannes Kepler Universität se trouve à Linz, en Autriche. Cette université moderne est située dans un cadre verdoyant, 
+            à proximité du centre-ville.
+        </span></p>
+    </section>
+
+    <section>
         <h2>⛺️ Et en dehors du cadre universitaire, qu'ai-je découvert ?</h2>
         <br>
         <!-- Wrap images in a flex container -->
@@ -184,5 +216,30 @@
     <footer>
         <p class="copyright">&copy; 2025 Rémi Pierron</p>
     </footer>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Fix for marker icon issue with Leaflet
+        delete L.Icon.Default.prototype._getIconUrl;
+        L.Icon.Default.mergeOptions({
+            iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+            iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+            shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png'
+        });
+
+        // Initialiser la carte centrée sur la JKU de Linz
+        var map = L.map('map').setView([48.3367, 14.3198], 15);
+
+        // Ajouter les tuiles OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 19
+        }).addTo(map);
+
+        // Ajouter un marqueur sur la JKU
+        var marker = L.marker([48.3367, 14.3198]).addTo(map);
+        marker.bindPopup('<b>Johannes Kepler Universität Linz</b><br>Altenberger Straße 69, 4040 Linz, Autriche').openPopup();
+    </script>
 </body>
 </html>
