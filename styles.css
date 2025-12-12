@@ -362,6 +362,11 @@ span {
     padding: 10px 0;
 }
 
+.software-logos .logos a {
+    display: inline-block;
+    text-decoration: none;
+}
+
 .software-logos .logos img {
     width: 72px;
     height: 72px;
@@ -384,7 +389,7 @@ span {
     box-shadow: 0 20px 40px rgba(0,0,0,0.5);
 }
 
-.software-logos .logos img:hover {
+.software-logos .logos a:hover img {
     will-change: transform;
     transform: translateY(-8px) scale(1.08) translateZ(0);
     box-shadow: 0 14px 30px rgba(0,0,0,0.4);
