@@ -7,6 +7,58 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
+<style>
+        /* Styles pour les sections */
+        
+
+        .projects-section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #000000;
+        }
+
+        /* Styles pour les cartes de projets */
+        .projects-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .project-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            text-align: center;
+            width: 300px;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .project-card h3 {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .project-card a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #000000;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .project-card a:hover {
+            background-color: #000000;
+            color: #fff;
+        }
+    </style>
 <body>
     
     <div class="wrapper">
@@ -55,6 +107,30 @@
                 <img src="image/rdp.jpeg" alt="Image 3">
             </a>
         </div>
+
+        <!-- Section des projets informatiques -->
+        <section id="projects-informatique" class="projects-section">
+            <h2>TOP 5 de mes meilleurs projets</h2>
+            <div class="projects-container">
+                
+                <div class="project-card">
+                    <img src="image/stock-39.jpeg" alt="Réseaux de neurones : classification d'images">
+                    <h3>Réseaux de neurones : classification d'images</h3>
+                    <a href="projets/details/resNeur.html">Voir le projet</a>
+                </div>
+                <div class="project-card">
+                    <img src="image/stock-21.jpeg" alt="Prédiction de la consommation électrique de la ville de Linz">
+                    <h3>Prédiction de la consommation électrique de la ville de Linz</h3>
+                    <a href="projets/details/stageJKU_pred_elec.html">Voir le projet</a>
+                </div>
+                <div class="project-card">
+                    <img src="image/meme3.jpg" alt="Datawarehouse">
+                    <h3>Projets de BUT3 SD VCOD</h3>
+                    <a href="projets/index/projectsBUT3.html">Voir les projets</a>
+                </div>
+                
+            </div>
+        </section>
 
         <!-- Nouvelle section : logos des logiciels -->
         <div class="software-logos">
