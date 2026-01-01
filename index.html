@@ -58,6 +58,50 @@
             background-color: #000000;
             color: #fff;
         }
+
+        /* Styles pour la frise chronologique */
+        .timeline-section {
+            background: #f9f9f9;
+            padding: 40px 20px;
+        }
+
+        .timeline-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+            color: #000000;
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            margin: 10px 0;
+            padding-left: 40px;
+            position: relative;
+        }
+
+
+        .timeline-content {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-content h3 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .timeline-content p {
+            margin: 0;
+            color: #666;
+        }
     </style>
 <body>
     
@@ -107,6 +151,38 @@
                 <img src="image/rdp.jpeg" alt="Image 3">
             </a>
         </div>
+
+        <!-- Section de la frise chronologique -->
+        <section id="timeline" class="timeline-section">
+            <h2>Mon Parcours en BUT Science des Données</h2>
+            <div class="timeline-container">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Lycée - Année 2021/2023</h3>
+                        <p>Baccalauréat Général, spécialités Mathématiques, Physique Chimie et HGGSP.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3><a href="projets/index/projectsBUT1.html">BUT 1 - Année 2023/2024</a></h3>
+                        <p>Découverte des fondamentaux : statistiques, bases de données, programmation Python et R, introduction aux fondamentaux de la Data Science.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3><a href="projets/index/projectsBUT2.html">BUT 2 - Année 2024/2025</a></h3>
+                        <p>Approfondissement : datavisualisation, architecture data, gestion de projet et stage à l'étranger 🇦🇹</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3><a href="projets/index/projectsBUT3.html">BUT 3 - Année 2025/2026</a></h3>
+                        <p>Spécialisation : deep learning, réseaux de neurones, big data, alternance à Retour de Plage 🌊</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Section des projets informatiques -->
         <section id="projects-informatique" class="projects-section">
