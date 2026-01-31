@@ -659,3 +659,80 @@ header > *, section > *, footer > *, .image-gallery > *, .software-logos > * {
         font-size: 14px;
     }
 }
+
+/* ========== CAROUSEL 3D ========== */
+.carousel-rotator {
+    position: relative;
+    width: 280px;
+    height: 200px;
+    transform-style: preserve-3d;
+    animation: rotateCarousel 16s infinite linear;
+}
+
+.image-container:hover .carousel-rotator {
+    animation-play-state: paused;
+}
+
+.carousel-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 3px solid #fff;
+    box-shadow: 0 5px 15px rgba(120, 67, 233, 0.3);
+    transition: transform 0.4s, box-shadow 0.4s;
+}
+
+.carousel-item:hover img {
+    transform: scale(1.35);
+    box-shadow: 0 25px 50px rgba(120, 67, 233, 0.5);
+    border-color: #7843E9;
+    z-index: 999;
+    cursor: pointer;
+}
+
+/* Positionnement 3D des images (3 images espacées de 120°) */
+.carousel-item:nth-child(1) { transform: rotateY(0deg) translateZ(200px); }
+.carousel-item:nth-child(2) { transform: rotateY(120deg) translateZ(200px); }
+.carousel-item:nth-child(3) { transform: rotateY(240deg) translateZ(200px); }
+
+@keyframes rotateCarousel {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+}
+
+/* Responsive pour le carousel */
+@media screen and (max-width: 600px) {
+    .image-container {
+        perspective: none !important;
+        height: auto !important;
+    }
+    
+    .carousel-rotator {
+        width: 100% !important;
+        height: auto !important;
+        transform: none !important;
+        animation: none !important;
+        display: flex;
+        gap: 15px;
+        overflow-x: auto;
+        padding: 10px;
+    }
+    
+    .carousel-item {
+        position: relative !important;
+        width: 200px;
+        height: 140px;
+        transform: none !important;
+        flex-shrink: 0;
+    }
+}
