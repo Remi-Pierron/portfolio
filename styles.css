@@ -249,6 +249,37 @@ a:hover {
     background-color: #3a2caa; /* Bouton au survol */
 }
 
+/* Bouton pour le chatbot / clone numérique */
+.chatbot-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: fit-content;
+    margin: 20px auto;
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #667eea 0%, #888aff 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chatbot-button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(102, 126, 234, 0.6);
+    color: white;
+    text-decoration: none;
+}
+
+.chatbot-button::before {
+    content: "🤖";
+    font-size: 24px;
+}
+
 /* Styles pour les cartes de projets */
 .project-card {
     background: #fff; /* Fond blanc */
