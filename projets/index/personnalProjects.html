@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Projets</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Styles pour les sections */
+        .projects-section {
+            margin: 40px 0;
+        }
+
+        .projects-section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #000000;
+        }
+
+        /* Styles pour les cartes de projets */
+        .projects-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .project-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            text-align: center;
+            width: 300px;
+        }
+
+        .project-card h3 {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .project-card a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #000000;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .project-card a:hover {
+            background-color: #000000;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="title">
+                Mes Projets Personnels
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Accueil</a></li>
+                    <li><a href="../../projects.html">Projets</a></li>
+                    <li><a href="../../about.html">À propos de moi</a></li>
+                    <li><a href="../../debrief.html">Mes études</a></li>
+                    <li><a href="../../contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- Section des projets informatiques -->
+    <section id="projects-informatique" class="projects-section">
+        <h2>🖥️ Mes projets pour mon propre compte</h2>
+        <div class="projects-container">
+            
+
+            <div class="project-card">
+                <img loading="lazy" decoding="async" src="../../image/stock-46.jpeg" alt="Application de veille automatisée propulsée par un LLM">
+                <h3>Application de veille automatisée propulsée par un LLM</h3>
+                <a href="../details/techWatch.html">Voir le projet</a>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        
+        <a href="../../projects.html" class="back-button">Retour</a>
+    </section>
+
+    <footer>
+        <p class="copyright">&copy; 2026 Rémi Pierron</p>
+    </footer>
+</body>
+</html>
