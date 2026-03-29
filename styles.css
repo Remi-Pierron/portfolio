@@ -17,6 +17,13 @@ body {
     transform: translateZ(0);
 }
 
+/* Optimisation : background-attachment: fixed désactive la composition GPU sur mobile */
+@media screen and (max-width: 768px) {
+    body {
+        background-attachment: scroll;
+    }
+}
+
 /* En-tête */
 header {
     background: #000000c6;
@@ -509,6 +516,18 @@ header > *, section > *, footer > *, .image-gallery > *, .software-logos > * {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+    }
+}
+
+/* Optimisation : réduire le backdrop-filter sur mobile pour alléger le GPU */
+@media screen and (max-width: 768px) {
+    header,
+    section,
+    footer,
+    .image-gallery,
+    .software-logos {
+        backdrop-filter: blur(4px) saturate(100%);
+        -webkit-backdrop-filter: blur(4px) saturate(100%);
     }
 }
 
